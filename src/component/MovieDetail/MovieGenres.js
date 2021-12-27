@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { View, Text, StyleSheet } from "react-native";
-import { darkBlue, white } from "../../helper/Color";
+import { white } from "../../helper/Color";
 
 const MovieGenres = ({ genre }) => {
   let component = genre.map((item, index) => {

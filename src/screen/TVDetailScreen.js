@@ -13,7 +13,7 @@ import MovieGenres from "../component/MovieDetail/MovieGenres";
 import MovieRating from "../component/MovieDetail/MovieRating";
 import MoviePlayButton from "../component/MovieDetail/MoviePlayButton";
 import MovieTitle from "../component/MovieDetail/MovieTitle";
-import { black, deepGray, white } from "../helper/Color";
+import { black, darkGray, white } from "../helper/Color";
 import BackIcon from "../component/Utils/BackIcon";
 import MovieSeason from "../component/MovieDetail/MovieSeason";
 import Icon from "react-native-vector-icons/Ionicons";

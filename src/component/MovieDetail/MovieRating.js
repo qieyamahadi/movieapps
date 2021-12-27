@@ -51,6 +51,6 @@ const _styles = StyleSheet.create({
   ratingText: {
     color: white,
     marginLeft: 75,
-    // fontFamily: "Montserrat-Medium",
+    fontWeight: "500"
   },
 });

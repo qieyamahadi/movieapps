@@ -4,7 +4,7 @@ import { View, TouchableWithoutFeedback } from "react-native";
 import FastImage from "react-native-fast-image";
 import Icon from "react-native-vector-icons/Feather";
 
-import MenuIcon from "../../assets/icons/open-menu.png";
+import MenuIcon from "../../assets/open-menu.png";
 import { white } from "../../helper/Color";
 
 class HomeHeader extends Component {

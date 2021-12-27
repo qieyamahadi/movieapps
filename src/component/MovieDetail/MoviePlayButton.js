@@ -5,7 +5,7 @@ import { View, StyleSheet, TouchableWithoutFeedback, Text } from "react-native";
 
 import Icon from "react-native-vector-icons/FontAwesome5";
 
-import { black, deepGray, orange, white } from "../../helper/Color";
+import { black, darkGray, orange, white } from "../../helper/Color";
 
 class MoviePlayButton extends Component {
   state = {
@@ -108,7 +108,7 @@ const _styles = StyleSheet.create({
   },
 
   modalStyle: {
-    backgroundColor: deepGray,
+    backgroundColor: darkGray,
     paddingHorizontal: 24,
     paddingTop: 0,
     paddingBottom: 48,
@@ -138,7 +138,7 @@ const _styles = StyleSheet.create({
   playText: {
     fontWeight: "600",
     textAlign: "right",
-    backgroundColor: deepGray,
+    backgroundColor: darkGray,
     color: white,
     paddingVertical: 4,
     paddingHorizontal: 8,

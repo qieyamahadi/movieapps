@@ -2,7 +2,7 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Text } from "react-native";
 
-import { black, white, orange, deepGray } from "../helper/Color";
+import { black, white, orange, darkGray } from "../helper/Color";
 import TVShowScreen from "../screen/TVShowScreen";
 import MovieScreen from "../screen/MovieScreen";
 
@@ -13,7 +13,7 @@ const HomeDrawerNavigator = () => {
     <Drawer.Navigator
       initialRouteName="Movies"
       drawerType={"slide"}
-      drawerStyle={{ width: "50%", backgroundColor: deepGray }}
+      drawerStyle={{ width: "50%", backgroundColor: darkGray }}
       drawerContentOptions={{
         activeBackgroundColor: "transparent",
         activeTintColor: orange,

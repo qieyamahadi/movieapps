@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/Ionicons";
 import { black, white } from "../../helper/Color";
 
-const BackIcon = ({ style, navigation, color }) => {
+const BackIcon = ({ style, navigation }) => {
   return (
     <View style={style}>
       <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
@@ -19,6 +19,5 @@ export default BackIcon;
 
 BackIcon.propTypes = {
   style: PropTypes.object,
-  navigation: PropTypes.object,
-  color: PropTypes.string,
+  navigation: PropTypes.object
 };
