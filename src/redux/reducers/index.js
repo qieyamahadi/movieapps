@@ -4,7 +4,6 @@ import {
   
   const initialState = {
     isLoading: false,
-    policyAccepted: false,
   }
   
   export default (state = initialState, { type, payload }) => {
