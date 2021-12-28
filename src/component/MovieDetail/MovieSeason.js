@@ -28,9 +28,7 @@ const MovieSeason = ({ seasonData, navigation, movieid }) => {
 const SeasonItem = (data, navigation, seasonName, movieid) => {
   const imageUrl = getImageUrl(data.poster_path, "uri", "w185")
   return (
-    <TouchableWithoutFeedback
-      onPress={() => navigation.navigate("Movieseason", { season: data, listSeason: seasonName, movieid: movieid })}
-    >
+    <TouchableWithoutFeedback>
       <View>
         <View style={[Styles.imagePlaceholder, { height: 180, width: 120, marginRight: 8, borderRadius: 10 }]}>
           <FastImage source={imageUrl} style={{ height: 180, width: 120, marginRight: 8, borderRadius: 10 }} />

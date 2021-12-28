@@ -9,7 +9,6 @@ import HomeDrawerNavigator from "./src/navigator/HomeDrawerNavigator"
 import TVDetailScreen from "./src/screen/TVDetailScreen"
 import WebViewScreen from "./src/screen/WebViewScreen"
 import MovieListScreen from "./src/screen/MovieListScreen"
-import MovieSeasonScreen from "./src/screen/MovieSeasonScreen"
 import { Provider } from "react-redux"
 
 const Stack = createStackNavigator()
@@ -41,7 +40,6 @@ const AppNavigator = () => {
       />
       <Stack.Screen name="Webview" component={WebViewScreen} />
       <Stack.Screen name="Movielist" component={MovieListScreen} />
-      <Stack.Screen name="Movieseason" component={MovieSeasonScreen} />
     </Stack.Navigator>
     // </Provider>
   )
