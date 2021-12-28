@@ -9,7 +9,6 @@ import { Styles } from "./Styles"
 
 const MovieImages = (props) => {
   const { navigation, images } = props
-  console.log("images", images)
   const { backdrops } = images
   const [isShowModal, setIsShowModal] = useState(false)
   const [imageModalIndex, setImageModalIndex] = useState(0)

@@ -65,7 +65,6 @@ export const requestTVShowScreen = (callback, err) => {
 }
 
 export const requestMovieDetailScreen = (id, callback) => {
-  console.log(callback)
   return Promise.all([
     request(getMovieDetailUrl(id)),
     request(getMovieCreditUrl(id)),
