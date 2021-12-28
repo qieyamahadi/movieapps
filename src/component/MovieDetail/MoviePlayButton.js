@@ -1,92 +1,88 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import Modal from "react-native-modal";
-import { View, StyleSheet, TouchableWithoutFeedback, Text } from "react-native";
+import React, { Component, useState } from "react"
+import PropTypes from "prop-types"
+import Modal from "react-native-modal"
+import { View, StyleSheet, TouchableWithoutFeedback, Text } from "react-native"
 
-import Icon from "react-native-vector-icons/FontAwesome5";
+import Icon from "react-native-vector-icons/FontAwesome5"
 
-import { black, darkGray, orange, white } from "../../helper/Color";
+import { black, darkGray, orange, white } from "../../helper/Color"
 
-class MoviePlayButton extends Component {
-  state = {
-    isModalShown: false,
-  };
+const MoviePlayButton = ({ navigation, videoData }) => {
+  const [isModalShown, setIsModalShown] = useState(false)
 
-  toggleModal = () => {
-    this.setState((prevState) => ({ isModalShown: !prevState.isModalShown }));
-  };
+  const toggleModal = () => {
+    setIsModalShown(!isModalShown)
+  }
 
-  renderPlayButton = () => {
+  const renderPlayButton = () => {
     return (
-      <TouchableWithoutFeedback onPress={this.toggleModal}>
+      <TouchableWithoutFeedback onPress={toggleModal}>
         <View style={_styles.wrapper}>
           <Icon name={"play"} size={20} color={white} style={_styles.icon} />
         </View>
       </TouchableWithoutFeedback>
-    );
-  };
+    )
+  }
 
-  onPressPlay = (key) => {
-    this.toggleModal();
-    this.props.navigation.navigate("Webview", { id: key });
-  };
+  const onPressPlay = (key) => {
+    toggleModal()
+    navigation.navigate("Webview", { id: key })
+  }
 
-  videoItem = () => {
-    const results = this.props.videoData.results.slice(0, 7);
+  const videoItem = () => {
+    const results = videoData.results.slice(0, 7)
     return results.map((item) => (
-      <View key={item.key} style={{ marginBottom: 8, flexDirection: "row", justifyContent: "space-between"}}>
+      <View key={item.key} style={{ marginBottom: 8, flexDirection: "row", justifyContent: "space-between" }}>
         <View style={{ width: "80%" }}>
           <Text style={{ fontWeight: "normal", fontSize: 14, color: white }}>{item.name}</Text>
           <Text style={{ fontWeight: "300", fontSize: 12, color: white }}>{item.type}</Text>
         </View>
-        <TouchableWithoutFeedback onPress={() => this.onPressPlay(item.key)}>
+        <TouchableWithoutFeedback onPress={() => onPressPlay(item.key)}>
           <View style={_styles.buttonPlay}>
             <Text style={_styles.playText}>Play</Text>
           </View>
         </TouchableWithoutFeedback>
       </View>
-    ));
-  };
+    ))
+  }
 
-  renderModal = () => {
-    const { results = [] } = this.props.videoData;
+  const renderModal = () => {
+    const { results = [] } = videoData
 
-    if (this.state.isModalShown && results.length !== 0) {
+    if (isModalShown && results.length !== 0) {
       return (
         <Modal
-          isVisible={this.state.isModalShown}
+          isVisible={isModalShown}
           style={{ justifyContent: "flex-end", margin: 0 }}
           swipeDirection={"down"}
-          onBackButtonPress={this.toggleModal}
-          onBackdropPress={this.toggleModal}
-          onSwipeComplete={this.toggleModal}
+          onBackButtonPress={toggleModal}
+          onBackdropPress={toggleModal}
+          onSwipeComplete={toggleModal}
         >
           <View style={_styles.modalStyle}>
             <View style={_styles.bar} />
             <Text style={_styles.videoText}>Videos</Text>
-            {this.videoItem()}
+            {videoItem()}
           </View>
         </Modal>
-      );
+      )
     }
-  };
-
-  render() {
-    return (
-      <>
-        {this.renderPlayButton()}
-        {this.renderModal()}
-      </>
-    );
   }
+
+  return (
+    <>
+      {renderPlayButton()}
+      {renderModal()}
+    </>
+  )
 }
 
-export default MoviePlayButton;
+export default MoviePlayButton
 
 MoviePlayButton.propTypes = {
   videoData: PropTypes.object,
   navigation: PropTypes.object,
-};
+}
 
 const _styles = StyleSheet.create({
   wrapper: {
@@ -128,10 +124,10 @@ const _styles = StyleSheet.create({
   },
 
   buttonPlay: {
-    alignSelf: "flex-start", 
-    borderRadius: 6, 
-    overflow: "hidden", 
-    borderColor: white, 
+    alignSelf: "flex-start",
+    borderRadius: 6,
+    overflow: "hidden",
+    borderColor: white,
     borderWidth: 0.3
   },
 
@@ -151,4 +147,4 @@ const _styles = StyleSheet.create({
     paddingBottom: 12,
     color: white
   },
-});
+})

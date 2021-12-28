@@ -26,4 +26,4 @@ export const genres = {
   "10766": { name: "Soap" },
   "10767": { name: "Talk" },
   "10768": { name: "War & Politics" },
-};
+}

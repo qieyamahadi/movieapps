@@ -1,3 +1,4 @@
+import { IS_OVERLAY_LOADING } from "../redux/types"
 import {
   getPopularMoviesUrl,
   getTopRatedMoviesUrl,
@@ -19,21 +20,27 @@ import {
   getTvShowVideoUrl,
   getMustWatchMoviesUrl,
   getMustWatchTVShowUrl,
-} from "./url";
+} from "./url"
 
 export const request = async (url) => {
   return fetch(url)
     .then(handleErrors)
     .then((response) => response.json())
     .catch((error) => {
-      console.error(error);
-    });
-};
+      console.error(error)
+    })
+}
 
 const handleErrors = (response) => {
-  if (!response.ok) throw Error(response.statusText);
-  return response;
-};
+  if (!response.ok) throw Error(response.statusText)
+  return response
+}
+
+
+export const setOverLayLoading = (isLoading) => ({
+  type: IS_OVERLAY_LOADING,
+  payload: isLoading,
+})
 
 export const requestMovieScreen = (callback, err) => {
   return Promise.all([
@@ -43,8 +50,8 @@ export const requestMovieScreen = (callback, err) => {
     request(getUpcomingMoviesUrl()),
   ])
     .then((values) => callback(values))
-    .catch(err);
-};
+    .catch(err)
+}
 
 export const requestTVShowScreen = (callback, err) => {
   return Promise.all([
@@ -54,10 +61,11 @@ export const requestTVShowScreen = (callback, err) => {
     request(getOnTheAirTVShowUrl()),
   ])
     .then((values) => callback(values))
-    .catch(err);
-};
+    .catch(err)
+}
 
 export const requestMovieDetailScreen = (id, callback) => {
+  console.log(callback)
   return Promise.all([
     request(getMovieDetailUrl(id)),
     request(getMovieCreditUrl(id)),
@@ -66,8 +74,8 @@ export const requestMovieDetailScreen = (id, callback) => {
     request(getMovieRecommendationsUrl(id)),
   ])
     .then((values) => callback(values))
-    .catch((error) => console.log(error));
-};
+    .catch((error) => console.log(error))
+}
 
 export const requestTvDetailScreen = (id, callback) => {
   return Promise.all([
@@ -78,13 +86,13 @@ export const requestTvDetailScreen = (id, callback) => {
     request(getTvShowRecommendationsUrl(id)),
   ])
     .then((values) => callback(values))
-    .catch((error) => console.log(error));
-};
+    .catch((error) => console.log(error))
+}
 
 export const requestSearchMovie = async (keyword) => {
-  return await request(getSearchMovieUrl(keyword));
-};
+  return await request(getSearchMovieUrl(keyword))
+}
 
 export const requestSearchTv = async (keyword) => {
-  return await request(getSearchTvUrl(keyword));
-};
+  return await request(getSearchTvUrl(keyword))
+}

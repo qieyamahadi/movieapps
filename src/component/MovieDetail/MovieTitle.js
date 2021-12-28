@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { View, Text } from "react-native";
-import { white } from "../../helper/Color";
+import React from "react"
+import PropTypes from "prop-types"
+import { View, Text } from "react-native"
+import { white } from "../../helper/Color"
 
 const MovieTitle = ({ title }) => {
   return (
@@ -9,11 +9,11 @@ const MovieTitle = ({ title }) => {
       <Text style={{ fontWeight: "bold", fontSize: 24, color: white }}>{title}</Text>
       <View style={{ width: 30, height: 5, backgroundColor: white, marginTop: 4, marginBottom: 8 }} />
     </View>
-  );
-};
+  )
+}
 
-export default MovieTitle;
+export default MovieTitle
 
 MovieTitle.propTypes = {
   title: PropTypes.string,
-};
+}

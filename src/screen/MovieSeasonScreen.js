@@ -1,45 +1,41 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Text, View, FlatList, StyleSheet, TouchableWithoutFeedback } from "react-native";
-import Modal from "react-native-modal";
-import FastImage from "react-native-fast-image";
-import { BlurView } from "@react-native-community/blur";
+import React, { Component, useEffect, useState } from "react"
+import PropTypes from "prop-types"
+import { Text, View, FlatList, StyleSheet, TouchableWithoutFeedback } from "react-native"
+import Modal from "react-native-modal"
+import FastImage from "react-native-fast-image"
+import { BlurView } from "@react-native-community/blur"
 
-import Screen from "../component/Screen";
-import { request } from "../api/api";
-import { getTvShowSeasonUrl, getImageUrl } from "../api/url";
-import { Styles } from "../component/MovieDetail/Styles";
-import { white, orange } from "../helper/Color";
-import BackIcon from "../component/Utils/BackIcon";
+import Screen from "../component/Screen"
+import { request } from "../api/api"
+import { getTvShowSeasonUrl, getImageUrl } from "../api/url"
+import { Styles } from "../component/MovieDetail/Styles"
+import { white, orange } from "../helper/Color"
+import BackIcon from "../component/Utils/BackIcon"
 
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
-class MovieSeasonScreen extends Component {
-  constructor(props) {
-    super(props);
-    const { season } = this.props.route.params;
-    this.state = {
-      dataSeason: [],
-      isLoaded: false,
-      season_number: season.season_number,
-      isModalVisible: false,
-    };
+const MovieSeasonScreen = (props) => {
+  const { navigation, route } = props
+  const { season, movieid, listSeason } = route.params
+  const [dataSeason, setDataSeason] = useState([])
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [season_number, setSeasonNumber] = useState(season.season_number)
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [scrollOffset, setScrollOffset] = useState()
+
+  useEffect(() => {
+    fetchSeasonData(season_number)
+  })
+
+  const fetchSeasonData = async (season_number) => {
+    let tempData = dataSeason
+    if (!tempData[season_number]) tempData[season_number] = await request(getTvShowSeasonUrl(movieid, season_number))
+
+    if (tempData[season_number]) this.setState({ dataSeason: tempData, isLoaded: true, season_number: season_number })
   }
 
-  componentDidMount() {
-    this.fetchSeasonData(this.state.season_number);
-  }
-
-  fetchSeasonData = async (season_number) => {
-    const { movieid } = this.props.route.params;
-    let tempData = this.state.dataSeason;
-    if (!tempData[season_number]) tempData[season_number] = await request(getTvShowSeasonUrl(movieid, season_number));
-
-    if (tempData[season_number]) this.setState({ dataSeason: tempData, isLoaded: true, season_number: season_number });
-  };
-
-  seasonEpisode = (data) => {
-    const imageUrl = getImageUrl(data.still_path, "uri", "w500");
+  const seasonEpisode = (data) => {
+    const imageUrl = getImageUrl(data.still_path, "uri", "w500")
     return (
       <View style={{ margin: 8, backgroundColor: white, overflow: "hidden", flex: 1 }}>
         <View style={{ flexDirection: "row" }}>
@@ -61,36 +57,37 @@ class MovieSeasonScreen extends Component {
           {data.overview}
         </Text>
       </View>
-    );
-  };
+    )
+  }
 
-  onPressSeason = (index) => {
-    this.fetchSeasonData(index);
-    this.toggleModal();
-  };
+  const onPressSeason = (index) => {
+    fetchSeasonData(index)
+    toggleModal()
+  }
 
-  handleOnScroll = (event) => {
-    this.setState({
-      scrollOffset: event.nativeEvent.contentOffset.y,
-    });
-  };
-  handleScrollTo = (p) => {
+  const handleOnScroll = (event) => {
+    // this.setState({
+    //   scrollOffset: event.nativeEvent.contentOffset.y,
+    // })
+    setScrollOffset(event.nativeEvent.contentOffset.y)
+  }
+
+  const handleScrollTo = (p) => {
     if (this.season_list.current) {
-      this.season_list.current.scrollTo(p);
+      this.season_list.current.scrollTo(p)
     }
-  };
+  }
 
-  toggleModal = () => {
-    this.setState((prevState) => ({ isModalVisible: !prevState.isModalVisible }));
-  };
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible)
+  }
 
-  seasonTab = (item, index) => {
-    const { season_number } = this.state;
+  const seasonTab = (item, index) => {
     return (
       <View style={{ margin: 8, flex: 1 }}>
         <TouchableWithoutFeedback
           onPress={() => {
-            this.onPressSeason(index);
+            onPressSeason(index)
           }}
         >
           <Text
@@ -105,11 +102,10 @@ class MovieSeasonScreen extends Component {
           </Text>
         </TouchableWithoutFeedback>
       </View>
-    );
-  };
+    )
+  }
 
-  renderTitle = () => {
-    const { navigation } = this.props;
+  const renderTitle = () => {
     return (
       <View>
         <View style={{ flexDirection: "row", marginTop: 24 }}>
@@ -119,15 +115,14 @@ class MovieSeasonScreen extends Component {
         </View>
         <View style={_styles.titleBar} />
       </View>
-    );
-  };
+    )
+  }
 
-  renderSeasonDropdown = () => {
-    const { season_number = 0 } = this.state;
-    const { listSeason } = this.props.route.params;
+  const renderSeasonDropdown = () => {
+    setSeasonNumber(0)
     return (
       <View style={{ padding: 16, paddingBottom: 8 }}>
-        <TouchableWithoutFeedback onPress={this.toggleModal}>
+        <TouchableWithoutFeedback onPress={toggleModal}>
           <View style={{ flexDirection: "row", alignSelf: "flex-start" }}>
             <Text
               style={{
@@ -143,36 +138,35 @@ class MovieSeasonScreen extends Component {
           </View>
         </TouchableWithoutFeedback>
       </View>
-    );
-  };
+    )
+  }
 
-  renderEpisodeList = () => {
-    const { season_number = 0 } = this.state;
+  const renderEpisodeList = () => {
+    setSeasonNumber(0)
     return (
       <View style={{ backgroundColor: white, flex: 1 }}>
-        {this.state.isLoaded && (
+        {isLoaded && (
           <FlatList
             keyExtractor={(item) => item.id.toString()}
-            data={this.state.dataSeason[season_number].episodes}
-            renderItem={({ item }) => this.seasonEpisode(item)}
+            data={dataSeason[season_number].episodes}
+            renderItem={({ item }) => seasonEpisode(item)}
             contentContainerStyle={{ margin: 8 }}
           />
         )}
       </View>
-    );
-  };
+    )
+  }
 
-  renderListSeasonModal = () => {
-    const { listSeason } = this.props.route.params;
+  const renderListSeasonModal = () => {
     return (
       <Modal
-        isVisible={this.state.isModalVisible}
+        isVisible={isModalVisible}
         animationIn={"fadeIn"}
         animationOut={"fadeOut"}
         style={{ height: "50%", margin: 0 }}
-        onBackButtonPress={this.toggleModal}
-        scrollTo={this.handleScrollTo}
-        scrollOffset={this.state.scrollOffset}
+        onBackButtonPress={toggleModal}
+        scrollTo={handleScrollTo}
+        scrollOffset={scrollOffset}
         propagateSwipe={true}
       >
         <BlurView
@@ -183,14 +177,14 @@ class MovieSeasonScreen extends Component {
         <View style={{ maxHeight: "50%", alignSelf: "center" }}>
           <FlatList
             ref={(ref) => (this.season_list = ref)}
-            onScroll={this.handleOnScroll}
+            onScroll={handleOnScroll}
             data={listSeason}
-            renderItem={({ item, index }) => this.seasonTab(item, index)}
+            renderItem={({ item, index }) => seasonTab(item, index)}
             showsVerticalScrollIndicator={false}
             keyExtractor={(item) => item}
           />
         </View>
-        <TouchableWithoutFeedback onPress={this.toggleModal}>
+        <TouchableWithoutFeedback onPress={toggleModal}>
           <View
             style={{
               position: "absolute",
@@ -206,22 +200,20 @@ class MovieSeasonScreen extends Component {
           </View>
         </TouchableWithoutFeedback>
       </Modal>
-    );
-  };
-
-  render() {
-    return (
-      <Screen>
-        {this.renderTitle()}
-        {this.renderSeasonDropdown()}
-        {this.renderEpisodeList()}
-        {this.renderListSeasonModal()}
-      </Screen>
-    );
+    )
   }
+
+  return (
+    <Screen>
+      {renderTitle()}
+      {renderSeasonDropdown()}
+      {renderEpisodeList()}
+      {renderListSeasonModal()}
+    </Screen>
+  )
 }
 
-export default MovieSeasonScreen;
+export default MovieSeasonScreen
 
 MovieSeasonScreen.propTypes = {
   route: PropTypes.shape({
@@ -233,7 +225,7 @@ MovieSeasonScreen.propTypes = {
   }),
   listSeason: PropTypes.any,
   navigation: PropTypes.object,
-};
+}
 
 const _styles = StyleSheet.create({
   headerTitle: {
@@ -252,4 +244,4 @@ const _styles = StyleSheet.create({
     marginTop: 4,
     alignSelf: "center",
   },
-});
+})

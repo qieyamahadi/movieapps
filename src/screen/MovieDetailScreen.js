@@ -89,7 +89,7 @@ class MovieDetailScreen extends Component {
           {this.movieInfoGeneral()}
           {this.movieInfoDetail()}
         </ScrollView>
-        <BackIcon navigation={navigation} style={{ marginLeft: 5, position: "absolute", top: 40 }} />
+        <BackIcon navigation={navigation} style={{ marginLeft: 5, position: "absolute", top: 40 }} color={white} />
       </View>
     );
   }
@@ -119,4 +119,5 @@ const Styles = StyleSheet.create({
     paddingTop: 5,
     backgroundColor: black,
   },
-});
+})
+

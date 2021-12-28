@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes, { object } from "prop-types";
-import { View, Text, FlatList, StyleSheet, TouchableNativeFeedback } from "react-native";
+import React from "react"
+import PropTypes, { object } from "prop-types"
+import { View, Text, FlatList, StyleSheet, TouchableNativeFeedback } from "react-native"
 
-import MoviePoster from "../MoviePoster";
-import { normalize } from "../../helper/FontSize";
-import { orange, white } from "../../helper/Color";
+import MoviePoster from "../MoviePoster"
+import { normalize } from "../../helper/FontSize"
+import { orange, white } from "../../helper/Color"
 
 const MoviesRow = ({ data, title, navigation, type }) => {
   return (
@@ -24,17 +24,17 @@ const MoviesRow = ({ data, title, navigation, type }) => {
         showsHorizontalScrollIndicator={false}
       />
     </View>
-  );
-};
+  )
+}
 
-export default MoviesRow;
+export default MoviesRow
 
 MoviesRow.propTypes = {
   data: PropTypes.arrayOf(object),
   title: PropTypes.string,
   navigation: PropTypes.object,
   type: PropTypes.oneOf(["tv", "movie"]),
-};
+}
 
 MoviesRow.defaultProps = {
   data: [
@@ -43,7 +43,7 @@ MoviesRow.defaultProps = {
     { id: 3, data: "3" },
     { id: 4, data: "4" },
   ],
-};
+}
 
 const Styles = StyleSheet.create({
   text: {
@@ -62,4 +62,4 @@ const Styles = StyleSheet.create({
     alignSelf: "flex-end",
     color: orange,
   },
-});
+})

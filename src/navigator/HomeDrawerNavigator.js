@@ -1,12 +1,12 @@
-import React from "react";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Text } from "react-native";
+import React from "react"
+import { createDrawerNavigator } from "@react-navigation/drawer"
+import { Text } from "react-native"
 
-import { black, white, orange, darkGray } from "../helper/Color";
-import TVShowScreen from "../screen/TVShowScreen";
-import MovieScreen from "../screen/MovieScreen";
+import { black, white, orange, darkGray } from "../helper/Color"
+import TVShowScreen from "../screen/TVShowScreen"
+import MovieScreen from "../screen/MovieScreen"
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator()
 
 const HomeDrawerNavigator = () => {
   return (
@@ -35,8 +35,8 @@ const HomeDrawerNavigator = () => {
         }}
       />
     </Drawer.Navigator>
-  );
-};
+  )
+}
 
 const CustomDrawerStyle = (color, focused, title) => {
   return (
@@ -50,7 +50,7 @@ const CustomDrawerStyle = (color, focused, title) => {
     >
       {title}
     </Text>
-  );
-};
+  )
+}
 
-export default HomeDrawerNavigator;
+export default HomeDrawerNavigator

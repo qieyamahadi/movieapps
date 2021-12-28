@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Dimensions, View, StyleSheet } from "react-native";
-import FastImage from "react-native-fast-image";
-import LinearGradient from "react-native-linear-gradient";
+import React from "react"
+import PropTypes from "prop-types"
+import { Dimensions, View, StyleSheet } from "react-native"
+import FastImage from "react-native-fast-image"
+import LinearGradient from "react-native-linear-gradient"
 
-import { getImageUrl } from "../../api/url";
-import { black, transparent } from "../../helper/Color";
+import { getImageUrl } from "../../api/url"
+import { black, transparent } from "../../helper/Color"
 
 const MovieBackdrop = ({ backdrop, children }) => {
-  const url = getImageUrl(backdrop, "uri", "original");
+  const url = getImageUrl(backdrop, "uri", "original")
   return (
     <View style={_styles.container}>
       <FastImage source={url} resizeMode={"cover"} style={_styles.imageStyle} />
@@ -17,15 +17,15 @@ const MovieBackdrop = ({ backdrop, children }) => {
         {children}
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default MovieBackdrop;
+export default MovieBackdrop
 
 MovieBackdrop.propTypes = {
   backdrop: PropTypes.string,
   children: PropTypes.any,
-};
+}
 
 const _styles = StyleSheet.create({
   container: {
@@ -45,4 +45,4 @@ const _styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-});
+})

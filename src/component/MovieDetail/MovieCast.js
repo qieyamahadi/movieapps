@@ -1,17 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { FlatList, View, Text } from "react-native";
-import FastImage from "react-native-fast-image";
+import React from "react"
+import PropTypes from "prop-types"
+import { FlatList, View, Text } from "react-native"
+import FastImage from "react-native-fast-image"
 
-import { getImageUrl } from "../../api/url";
-import { Styles } from "./Styles";
+import { getImageUrl } from "../../api/url"
+import { Styles } from "./Styles"
 
 const MovieCast = ({ credit }) => {
-  let cast = credit.cast.sort((a, b) => (a.order > b.order ? 1 : -1));
-  cast = credit.cast.slice(0, 10);
+  let cast = credit.cast.sort((a, b) => (a.order > b.order ? 1 : -1))
+  cast = credit.cast.slice(0, 10)
 
-  if (cast.length === 0) return null;
-
+  if (cast.length === 0) return null
+console.log("cast", cast)
   return (
     <View>
       <Text style={Styles.titleText}>Cast</Text>
@@ -23,11 +23,11 @@ const MovieCast = ({ credit }) => {
         showsHorizontalScrollIndicator={false}
       />
     </View>
-  );
-};
+  )
+}
 
 const Cast = (cast) => {
-  const imageUrl = getImageUrl(cast.profile_path, "uri", "w185");
+  const imageUrl = getImageUrl(cast.profile_path, "uri", "w185")
   return (
     <View>
       <View style={Styles.castImageContainer}>
@@ -37,11 +37,11 @@ const Cast = (cast) => {
         {cast.name}
       </Text>
     </View>
-  );
-};
+  )
+}
 
-export default MovieCast;
+export default React.memo(MovieCast)
 
 MovieCast.propTypes = {
   credit: PropTypes.object,
-};
+}

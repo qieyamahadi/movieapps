@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { View, Text, TouchableWithoutFeedback } from "react-native";
+import React, { useState } from "react"
+import PropTypes from "prop-types"
+import { View, Text, TouchableWithoutFeedback } from "react-native"
 
-import { Styles } from "./Styles";
+import { Styles } from "./Styles"
 
 const MovieOverview = ({ overview }) => {
-  const [textShown, setTextShown] = useState(false);
+  const [textShown, setTextShown] = useState(false)
 
-  if (!overview) return null;
+  if (!overview) return null
 
   return (
     <View>
@@ -18,11 +18,11 @@ const MovieOverview = ({ overview }) => {
         </Text>
       </TouchableWithoutFeedback>
     </View>
-  );
-};
+  )
+}
 
-export default MovieOverview;
+export default React.memo(MovieOverview)
 
 MovieOverview.propTypes = {
   overview: PropTypes.string,
-};
+}

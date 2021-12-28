@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { FlatList } from "react-native";
+import React from "react"
+import PropTypes from "prop-types"
+import { FlatList } from "react-native"
 
-import MoviesPosterandInfo from "./MoviePosterAndInfo";
+import MoviesPosterandInfo from "./MoviePosterAndInfo"
 
 const MovieList = ({ results, navigation, type, onReachEnd }) => {
   return (
@@ -15,18 +15,18 @@ const MovieList = ({ results, navigation, type, onReachEnd }) => {
       onEndReached={onReachEnd}
       onEndReachedThreshold={0.9}
     />
-  );
-};
+  )
+}
 
-export default MovieList;
+export default MovieList
 
 MovieList.propTypes = {
   results: PropTypes.array,
   navigation: PropTypes.object,
   type: PropTypes.oneOf(["tv", "movie"]),
   onReachEnd: PropTypes.func,
-};
+}
 
 MovieList.defaultProps = {
   onReachEnd: null,
-};
+}

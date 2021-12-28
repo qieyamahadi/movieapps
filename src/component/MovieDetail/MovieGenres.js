@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { View, Text, StyleSheet } from "react-native";
-import { white } from "../../helper/Color";
+import React from "react"
+import PropTypes from "prop-types"
+import { View, Text, StyleSheet } from "react-native"
+import { white } from "../../helper/Color"
 
 const MovieGenres = ({ genre }) => {
   let component = genre.map((item, index) => {
@@ -9,21 +9,21 @@ const MovieGenres = ({ genre }) => {
       <View key={index} style={_styles.view}>
         <Text style={_styles.text}>{item.name}</Text>
       </View>
-    );
-  });
+    )
+  })
 
-  return <View style={_styles.container}>{component}</View>;
-};
+  return <View style={_styles.container}>{component}</View>
+}
 
-export default MovieGenres;
+export default React.memo(MovieGenres)
 
 MovieGenres.propTypes = {
   genre: PropTypes.array,
-};
+}
 
 MovieGenres.defaultProps = {
   genre: [],
-};
+}
 
 const _styles = StyleSheet.create({
   container: {
@@ -47,4 +47,4 @@ const _styles = StyleSheet.create({
     fontWeight: "300",
     fontSize: 12,
   },
-});
+})

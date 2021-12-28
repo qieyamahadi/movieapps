@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { gray, white } from "../../helper/Color";
+import { StyleSheet } from "react-native"
+import { gray, white } from "../../helper/Color"
 
 export const Styles = StyleSheet.create({
   titleText: {
@@ -53,4 +53,4 @@ export const Styles = StyleSheet.create({
     marginRight: 8,
     borderRadius: 10,
   },
-});
+})

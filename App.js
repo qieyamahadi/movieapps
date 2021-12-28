@@ -1,23 +1,24 @@
-import React, { useEffect } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator, CardStyleInterpolators } from "@react-navigation/stack";
-import SplashScreen from "react-native-splash-screen";
+import React, { useEffect } from "react"
+import { NavigationContainer } from "@react-navigation/native"
+import { createStackNavigator, CardStyleInterpolators } from "@react-navigation/stack"
+import SplashScreen from "react-native-splash-screen"
 
-import MovieDetailScreen from "./src/screen/MovieDetailScreen";
-import SearchScreen from "./src/screen/SearchScreen";
-import HomeDrawerNavigator from "./src/navigator/HomeDrawerNavigator";
-import TVDetailScreen from "./src/screen/TVDetailScreen";
-import WebViewScreen from "./src/screen/WebViewScreen";
-import MovieListScreen from "./src/screen/MovieListScreen";
+import MovieDetailScreen from "./src/screen/MovieDetailScreen"
+import SearchScreen from "./src/screen/SearchScreen"
+import HomeDrawerNavigator from "./src/navigator/HomeDrawerNavigator"
+import TVDetailScreen from "./src/screen/TVDetailScreen"
+import WebViewScreen from "./src/screen/WebViewScreen"
+import MovieListScreen from "./src/screen/MovieListScreen"
+import MovieSeasonScreen from "./src/screen/MovieSeasonScreen"
+import { Provider } from "react-redux"
 
-import OfflineNotice from "./src/component/OfflineNotice";
-import MovieSeasonScreen from "./src/screen/MovieSeasonScreen";
-
-const Stack = createStackNavigator();
-console.disableYellowBox = true;
+const Stack = createStackNavigator()
+console.disableYellowBox = true
 
 const AppNavigator = () => {
   return (
+    // <Provider store={}>
+      
     <Stack.Navigator
       initialRouteName="Home"
       screenOptions={{
@@ -42,20 +43,20 @@ const AppNavigator = () => {
       <Stack.Screen name="Movielist" component={MovieListScreen} />
       <Stack.Screen name="Movieseason" component={MovieSeasonScreen} />
     </Stack.Navigator>
-  );
-};
+    // </Provider>
+  )
+}
 
 const App = () => {
   useEffect(() => {
-    SplashScreen.hide();
-  }, []);
+    SplashScreen.hide()
+  }, [])
 
   return (
     <NavigationContainer>
       <AppNavigator />
-      <OfflineNotice />
     </NavigationContainer>
-  );
-};
+  )
+}
 
-export default App;
+export default App

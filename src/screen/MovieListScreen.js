@@ -1,34 +1,31 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Text, View, StyleSheet } from "react-native";
+import React, { Component, useEffect, useState } from "react"
+import PropTypes from "prop-types"
+import { Text, View, StyleSheet } from "react-native"
 
-import MovieList from "../component/MovieList";
-import Screen from "../component/Screen";
-import { fetchFunctionListScreen } from "../helper/Types";
-import BackIcon from "../component/Utils/BackIcon";
-import { orange, white } from "../helper/Color";
+import MovieList from "../component/MovieList"
+import Screen from "../component/Screen"
+import { fetchFunctionListScreen } from "../helper/Types"
+import BackIcon from "../component/Utils/BackIcon"
+import { orange, white } from "../helper/Color"
 
-class MovieListScreen extends Component {
-  state = {
-    page: 1,
-    data: this.props.route.params.data,
-  };
+const MovieListScreen = (props) => {
+  const { navigation, route } = props
+  const { data, type, title } = route.params
+  const [page, setPage] = useState(1)
+  const [listData, setListData] = useState(data)
 
-  onReachEnd = async () => {
-    const page = { page: this.state.page + 1 };
-    const { type, title } = this.props.route.params;
+  const onReachEnd = async () => {
+    const fetchUrl = fetchFunctionListScreen(type, title)
+    const response = await fetchUrl(page)
 
-    const fetchUrl = fetchFunctionListScreen(type, title);
-    const response = await fetchUrl(page);
-
+    console.log("response asdasda", response)
     if (response) {
-      this.setState((prevState) => ({ page: prevState.page + 1, data: [...prevState.data, ...response.results] }));
+      setPage(page + 1)
+      setData([...data, ...response.results])
     }
-  };
+  }
 
-  renderTitle = () => {
-    const { navigation } = this.props;
-    const { title, type } = this.props.route.params;
+  const renderTitle = () => {
     return (
       <View>
         <View style={{ flexDirection: "row", marginTop: 24 }}>
@@ -38,28 +35,23 @@ class MovieListScreen extends Component {
         </View>
         <View style={_styles.titleBar} />
       </View>
-    );
-  };
-
-  render() {
-    const { navigation } = this.props;
-    const { type } = this.props.route.params;
-    const { data } = this.state;
-    return (
-      <Screen>
-        {this.renderTitle()}
-        <MovieList results={data} navigation={navigation} onReachEnd={this.onReachEnd} type={type} />
-      </Screen>
-    );
+    )
   }
+
+  return (
+    <Screen>
+      {renderTitle()}
+      <MovieList results={listData} navigation={navigation} onReachEnd={onReachEnd} type={type} />
+    </Screen>
+  )
 }
 
-export default MovieListScreen;
+export default MovieListScreen
 
 MovieListScreen.propTypes = {
   route: PropTypes.any,
   navigation: PropTypes.object,
-};
+}
 
 const _styles = StyleSheet.create({
   headerTitle: {
@@ -88,4 +80,4 @@ const _styles = StyleSheet.create({
     alignSelf: "center",
     width: "70%",
   },
-});
+})
