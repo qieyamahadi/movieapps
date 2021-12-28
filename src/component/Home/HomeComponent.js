@@ -14,7 +14,7 @@ const HomeComponent = (props) => {
 
   const onRefresh = async () => {
     setIsRefreshing(true)
-    await this.props.onRefresh()
+    await props.onRefresh()
     setIsRefreshing(false)
   }
 
